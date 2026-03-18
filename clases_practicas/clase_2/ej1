@@ -1,0 +1,47 @@
+# Ejercicio 1
+import random
+# Def arreglo
+voltajes_ej = [12.6 , 12.4 , 12.3 , 12.1 , 11.9 , 11.8 , 11.6 , 11.4]
+voltajes_rand = [ round ( random . uniform ( 12.5 , 10 ) , 1 ) for _
+in range ( 32 ) ]
+
+# Función de analisis de la lista
+def analizar_voltajes(lista_voltajes): 
+    v_max = max(lista_voltajes)
+    v_min = min(lista_voltajes)
+    v_mean = sum(lista_voltajes)/len(lista_voltajes)
+    v_lt12 = 0
+    for i in lista_voltajes:
+        if i < 12:
+            v_lt12 += 1
+    return v_max, v_min, v_mean, v_lt12
+
+# Función de estado de batería
+def estado_bateria(promedio):
+    status = ""
+    if promedio >= 12.2:
+        status = "Batería en buen estado"
+    elif promedio < 12.2 and promedio >= 11.8:
+        status = "Batería en descarga"
+    elif promedio < 11.8:
+        status = "Batería crítica"
+    else:
+        status = "Valor de voltaje inválido"
+    return status
+
+# Función de print 
+def mostrar_analisis(voltajes):
+    analisis1 = analizar_voltajes(voltajes)
+    estado1 = estado_bateria(analisis1[2])
+    print("----------------- Análisis y Estado batería ----------------------")
+    print(f"Analizando lista {voltajes} ")
+    print("Valor máximo de voltaje: ",analisis1[0])
+    print("Valor mínimo de voltaje: ",analisis1[1])
+    print("Valor promedio de voltaje: ",analisis1[2])
+    print("Mediciones bajo 12 V: ", analisis1[3])
+    print("")
+    print("Estado batería: ", estado1)
+    print("------------------------------------------------------------------")
+# -------------------------------------------------------------------------------------------------------------------------
+mostrar_analisis(voltajes_ej)
+mostrar_analisis(voltajes_rand)
