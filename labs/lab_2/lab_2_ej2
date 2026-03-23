@@ -1,0 +1,17 @@
+# --- Datos para el Ejercicio 2 ( Listas ) ---
+coords_x = [2 , 8 , 8 , 2]
+coords_y = [1 , 1 , 5 , 5]
+
+def evaluar_zona_poligono(x,y):
+    ancho= max(x)-min(x)
+    largo= max(y)-min(y)
+    area= ancho*largo
+    x_centro= (max(x)-min(x))/2
+    y_centro= (max(y)-min(y))/2
+    centro_geometrico= (x_centro,y_centro)
+    print("------------------------------------------------------------------------------------")
+    print(f"La caja tiene largo de {largo} y de ancho {ancho}, donde su area total sera {area}")
+    print(f"El centro geometrico es {centro_geometrico}")
+    print("------------------------------------------------------------------------------------")
+# llamar funcion
+evaluar_zona_poligono(coords_x,coords_y)
