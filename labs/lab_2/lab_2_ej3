@@ -1,0 +1,27 @@
+# --- Datos para el Ejercicio 3 ( Tuplas y Diccionarios ) ---
+# Puedes desempaquetar esta tupla en * args
+angulos_prueba = 45,90,-30,15
+
+# Puedes desempaquetar este diccionario en ** kwargs
+configuracion_robot = {
+"velocidad": 50 ,
+"torque_max": 120 ,
+"herramienta": 30
+}
+
+def calibrar_robot(*args,**kwargs):
+    desp_tot = sum(args)
+    n_arts = 0
+    for i in args:
+        n_arts += 1
+
+    print("-------------------------------------------------------")
+    print("Desplazamiento total en grados: ", desp_tot)
+    print("")
+    print("Número de articulaciones en desplazamiento: ", n_arts)
+    for i, data in kwargs:
+        if data["torque_max"]:
+            if data["torque_max"] > 100:
+                print("AAAAA")     
+
+calibrar_robot(angulos_prueba,configuracion_robot)

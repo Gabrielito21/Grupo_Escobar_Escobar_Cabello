@@ -1,0 +1,47 @@
+# --- Datos para el Ejercicio 1 ( Diccionarios ) ---
+red_esp8266 = {
+" Nodo_Tanque ": {"ip": "192.168.1.10", "estado": "activo", "salida_dac": 3000} ,
+" Nodo_Motor ": {"ip": "192.168.1.11", "estado": "falla", "salida_dac": 0} ,
+" Nodo_Valvula ": {"ip": "192.168.1.12", "estado": "inactivo", "salida_dac": 150} ,
+" Nodo_Caldera ": {"ip": "192.168.1.13", "estado": "activo", "salida_dac": 4000}
+}
+
+# --- Datos para el Ejercicio 2 ( Listas ) ---
+coords_x = [2 , 8 , 8 , 2]
+coords_y = [1 , 1 , 5 , 5]
+
+# --- Datos para el Ejercicio 3 ( Tuplas y Diccionarios ) ---
+# Puedes desempaquetar esta tupla en * args
+angulos_prueba = (45 , 90 , -30 , 15)
+
+# Puedes desempaquetar este diccionario en ** kwargs
+configuracion_robot = {
+" velocidad ": 50 ,
+" torque_max ": 120 ,
+" herramienta ": " pinza "
+}
+
+# Ejercicio 1
+def auditar_red():
+    print("------------- Auditoría de Red ESP8266 ---------------")
+    n_nodos = 0
+    ip_falla = []
+    total_dac = 0
+    n_nodos_act = 0
+    for i, data in red_esp8266.items():
+        n_nodos += 1
+        if (data["estado"] == "falla")  or (data["estado"] == "inactivo"):
+            ip_falla.append(data["ip"])
+        elif (data["estado"] == "activo"):
+            total_dac = data["salida_dac"] + total_dac
+            n_nodos_act += 1
+    dac_mean = total_dac/n_nodos_act
+    print("Nodos registrados: ",n_nodos)
+    print("")
+    print("IP's de nodos inactivos/falla: ", ip_falla)
+    print("")
+    print("Promedio salida DAC en nodos activos: ",dac_mean)
+    print ("---------------------------------------------------")
+    # -------------------
+
+auditar_red()
