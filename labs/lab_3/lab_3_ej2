@@ -1,0 +1,19 @@
+import matplotlib.pyplot as plt
+encuesta = {
+    "Python": 45,
+    "C++": 28,
+    "C": 15,
+    "Java": 12,
+    "Rust": 8
+}
+nombres=[]
+votos=[]
+
+for nombre in encuesta:
+    nombres.append(nombre)
+    votos.append(encuesta[nombre])
+
+plt.bar(nombres, votos, color=["red", "orange", "yellow", "green", "blue"])
+plt.xlabel("Lenguajes de Programación")
+plt.ylabel("Cantidad de votos")
+plt.show()

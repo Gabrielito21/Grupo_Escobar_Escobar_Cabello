@@ -1,0 +1,59 @@
+# Ejercicio 1
+# ----------- Librerias --------------
+import numpy as np
+import matplotlib.pyplot as plt
+# ------------------------------------
+
+# Se solicita al usuario la cantidad n deseada:
+n = int(input("Ingrese la cantidad de terminos que desea: "))
+def fibo(n):
+    lista = [] # Lista vacía
+    a = 0 # Primer término
+    b = 1 # Segundo término
+    contador = 0 # Contador
+
+    while contador < n:
+        lista.append(a) # Se añade el primer termino a la lista
+        temp = a + b
+        a = b # Se actualiza el valor del primer termino
+        b = temp
+        contador +=1 
+    return lista
+
+lista_fibonacci = fibo(n) 
+print("------------------------------------------------------------------------")
+print("Los primeros n términos de la serie de fibonacci son: ", lista_fibonacci)
+print("------------------------------------------------------------------------")
+
+angle1 = np.linspace(0,np.pi/2,250)
+angle2 = np.linspace(np.pi/2,np.pi,250)
+angle3 = np.linspace(np.pi,(3*np.pi)/2,250)
+angle4 = np.linspace((3*np.pi)/2,2*np.pi,250)
+angulos = [angle1, angle2, angle3, angle4]
+pos = 1
+i = 0
+cx = 0 # Centro inicial x
+cy = 0 # Centro inicial y
+while pos < n:
+    if pos > 1:
+        if i == 1:     
+            cy -= lista_fibonacci[pos-2]
+        elif i == 2:
+            cx += lista_fibonacci[pos-2]
+        elif i == 3:
+            cy += lista_fibonacci[pos-2]
+        elif i == 0:
+            cx -= lista_fibonacci[pos-2]
+
+    plt.plot(lista_fibonacci[pos] * np.cos(angulos[i]) + cx, lista_fibonacci[pos] * np.sin(angulos[i]) + cy)
+
+    i += 1
+    if i == 4:
+        i = 0
+    pos +=1
+plt.xlabel("Eje X")
+plt.ylabel("Eje Y")
+plt.title("Espiral de fibonacci")
+plt.grid()
+plt.axis('equal')
+plt.show()

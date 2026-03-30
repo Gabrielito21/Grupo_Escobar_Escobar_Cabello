@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import time
+
+# Ejercicio 3
+Lista_1 = [[random.random() for _ in range(100)] for _ in range(100)]
+Lista_2 = [[random.random() for _ in range(100)] for _ in range(100)]
+
+npLista_1=np.array(Lista_1)
+npLista_2=np.array(Lista_2)
+
+# Sin numpy
+inicio=time.time()
+Lista_3 = [[0 for _ in range(100)] for _ in range(100)]
+
+for i in range(100):
+    for j in range(100):
+        for k in range(100):
+            Lista_3[i][j] += Lista_1[i][k] * Lista_2[k][j]
+final=time.time()
+total_de_tiempo=final - inicio
+
+#Con numpy
+npinicio=time.time()
+npLista_3=np.dot(npLista_1,npLista_2)
+npfinal=time.time()
+
+nptotal_de_tiempo= npfinal - npinicio
+
+print(f"el tiempo total sin ocupar la libreria numpy fue de: {total_de_tiempo:.6f} segundos")
+print(f"el tiempo total ocupando la libreria numpy fue de: {nptotal_de_tiempo:.6f} segundos")
+
+a=total_de_tiempo/nptotal_de_tiempo
+
+print(f"fue {a:.6f} veces mas rapido el tiempo comparado con la libreria con sin ella")
