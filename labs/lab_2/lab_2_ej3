@@ -20,8 +20,7 @@ def calibrar_robot(*args,**kwargs):
     print("")
     print("Número de articulaciones en desplazamiento: ", n_arts)
     for i, data in kwargs:
-        if data["torque_max"]:
-            if data["torque_max"] > 100:
-                print("AAAAA")     
+        if data["torque_max"] > 100:
+            print("")
 
 calibrar_robot(angulos_prueba,configuracion_robot)

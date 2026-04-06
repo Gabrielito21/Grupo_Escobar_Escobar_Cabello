@@ -10,16 +10,6 @@ red_esp8266 = {
 coords_x = [2 , 8 , 8 , 2]
 coords_y = [1 , 1 , 5 , 5]
 
-# --- Datos para el Ejercicio 3 ( Tuplas y Diccionarios ) ---
-# Puedes desempaquetar esta tupla en * args
-angulos_prueba = (45 , 90 , -30 , 15)
-
-# Puedes desempaquetar este diccionario en ** kwargs
-configuracion_robot = {
-" velocidad ": 50 ,
-" torque_max ": 120 ,
-" herramienta ": " pinza "
-}
 
 # Ejercicio 1
 def auditar_red():

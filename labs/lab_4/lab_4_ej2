@@ -1,0 +1,22 @@
+# Ejercicio 2 lab 4
+import pandas as pd
+
+# Diccionario
+
+datos_juegos = {
+"Juego": [" Cyberpunk 2077 ", " Minecraft ", " Hollow Knight ", " FIFA 24"] ,
+"Precio_Base": [40000 , 15000 , 7500 , 45000] ,
+"Descuento_Porcentaje": [50 , 0 , 20 , 10]
+}
+
+# Se crea el df a partir del diccionario
+df = pd.DataFrame(datos_juegos)
+
+# Nueva columna Precio_Final
+df["Precio_Final"] = df["Precio_Base"] * (1 - df["Descuento_Porcentaje"]/100)
+
+# DataFrame Filtrado
+df_filt = df[df["Precio_Final"] < 20000]
+
+# Se imprimen los resultados
+print(df_filt)

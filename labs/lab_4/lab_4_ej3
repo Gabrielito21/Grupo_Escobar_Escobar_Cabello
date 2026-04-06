@@ -1,0 +1,7 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+# ejercicio 3
+datos =pd.read_csv("notas_alumnos.csv")
+datos_corregidos= datos.dropna()
+datos_corregidos["Promedio de notas"]= (datos_corregidos["Parcial_1"]+ datos_corregidos["Parcial_2"])/2
+print(datos_corregidos)

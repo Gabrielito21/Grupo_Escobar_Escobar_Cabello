@@ -1,0 +1,17 @@
+# Ejercicio 4 lab 4
+import matplotlib.pyplot as plt 
+import pandas as pd
+
+df = pd.read_csv("ventas_tienda.csv")
+
+plt.figure ( figsize =(8 ,4) )
+
+plt.plot(df["Mes"],df["Laptops"],label="Laptops")
+plt.plot(df["Mes"],df["Smartphones"],label="Smartphones")
+plt.xticks ( rotation =45) 
+plt.legend ()
+plt.xlabel("MES")
+plt.ylabel("Cantidad de ventas")
+plt.title("Graficas de ventas de Smartphones y Laptops")
+plt.grid() 
+plt.show()
