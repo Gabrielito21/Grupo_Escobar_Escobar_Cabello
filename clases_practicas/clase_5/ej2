@@ -1,0 +1,25 @@
+# Clase práctica 5: Ejercicio 2
+# Se define la función:
+
+def calcular_eficiencia(p_salida, p_entrada):
+    try:
+        assert 0 <= p_salida, "Error: Potencia de salida debe ser positiva"
+        assert 0 <= p_entrada, "Error: Potencia de entrada debe ser positiva"
+        ef = (p_salida/p_entrada)*100
+        print("La eficiencia del motor con potencia de entrada ", p_entrada, " W, y potencia de salida ",p_salida, " W, es de ", ef, "%")
+        return ef
+    except ZeroDivisionError:
+        print("Error: Motor apagado o sin consumo")
+    except AssertionError as e:
+        return e
+
+# Se prueba la función
+
+print("----------------- Prueba del motor ------------------")
+p1 = (150,200)
+p2 = (100,0)
+p3 = (-50,100)
+ef1 = calcular_eficiencia(p1[0],p1[1])
+ef2 = calcular_eficiencia(p2[0],p2[1])
+ef3 = calcular_eficiencia(p3[0],p3[1])
+print("-----------------------------------------------------")

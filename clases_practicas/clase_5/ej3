@@ -1,0 +1,35 @@
+#ejemplo 3
+
+import matplotlib.pyplot as plt  
+calibracion = {"temp": [1.02, 0.98, 1.04, 1.01], "hum":
+[1.05, 0.99, 1.02], "presion": [1.0, 0.99, 1.01, 0.98]}
+
+
+for nombre, data in calibracion.items():
+    print(f"Sensor: {nombre}, Indice de Calibración: {data}")
+
+try:
+    sensor = input("Ingrese el nombre del sensor: ")
+    indice = int(input("Ingrese el índice de calibración: "))
+
+    valor=calibracion[sensor][indice] 
+
+    print(f"El Indice de calibración es: {valor}")
+    factores = calibracion[sensor]
+    indices_x = list(range(len(factores)))
+
+    plt.figure(figsize=(8,4))
+    plt.bar(indice,valor,color="orange")
+    plt.xlabel("Indice")
+    plt.ylabel("Valor")
+    plt.title("Calibracion de sensores")
+    plt.xticks(indices_x)
+    plt.grid()
+    plt.show()
+
+except KeyError:
+    print("Error: El sensor ingresado no existe en el registro.")
+except IndexError:
+    print("Error: El índice está fuera de rango para ese sensor.")
+except ValueError:
+    print("Error: El índice debe ser un número entero válido.")

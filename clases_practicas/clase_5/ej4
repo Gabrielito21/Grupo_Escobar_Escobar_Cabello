@@ -1,0 +1,18 @@
+# ejercicio 4
+parametros= None
+try:
+    parametros = open('parametros_robot.txt', 'r')  
+    print("Archivo abierto correctamente.")
+    
+    fallo = 10 / 0 
+
+except FileNotFoundError:
+    print("Archivo de configuración no encontrado.")
+except ZeroDivisionError:
+    print("Error de cálculo durante la lectura del parametros.")
+finally:
+    if parametros is not None:
+        parametros.close()
+        print("Parametros guardados")
+    else:
+        print("No existen parametros que guardar")

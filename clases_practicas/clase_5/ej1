@@ -1,0 +1,27 @@
+# Clase Practica 5: Ejercicio 1
+
+# Se define función
+
+def limpiar_datos(lecturas):
+    lista_limpia = []
+    for i in lecturas:
+        try:
+            valor_float = float(i)
+            lista_limpia.append(valor_float)
+        except ValueError:
+            print("Valor ",i, " es invalido; omitiendo...")
+        except TypeError:
+            print("Valor ",i, " es invalido; omitiendo...")
+    return lista_limpia
+        
+# Se define la lista de ejemplo y se limpia:
+lista_ejemplo = [22.5, '23.1', 'Error' , None, 21.8, ' ']
+lista_ejemplo_limpia = limpiar_datos(lista_ejemplo)
+# Se calcula el promedio de la lista limpia
+promedio_med = sum(lista_ejemplo_limpia)/len(lista_ejemplo_limpia)
+
+# Se imprimen los datos obtenidos
+print("--------------------------- Lecturas -------------------------------")
+print("Lista obtenida: ",lista_ejemplo_limpia)
+print("Promedio de lecturas: ",promedio_med)
+print("--------------------------------------------------------------------")
