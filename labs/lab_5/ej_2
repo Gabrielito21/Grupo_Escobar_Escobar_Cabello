@@ -1,0 +1,18 @@
+# Ejercicio 2
+
+def mover_servo(angulo):
+    try:
+        assert 0 <= int(angulo) <= 180, "Error: Ángulo debe estar en el rango [0°,180°]"
+        if angulo != int:
+            raise TypeError("Entrada no válida, ingrese un número entero.")    
+    except AssertionError as e:
+        return print(e)
+    except TypeError as e:
+        return print(e)
+    finally:
+        print("Estado del motor: Standby")
+        return angulo
+
+a = mover_servo(100)
+b = mover_servo(-10)
+c = mover_servo("abc")
