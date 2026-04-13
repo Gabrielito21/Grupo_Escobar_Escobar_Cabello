@@ -11,7 +11,7 @@ def calcular_eficiencia(p_salida, p_entrada):
     except ZeroDivisionError:
         print("Error: Motor apagado o sin consumo")
     except AssertionError as e:
-        return e
+        return print(e)
 
 # Se prueba la función
 

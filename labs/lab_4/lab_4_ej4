@@ -8,7 +8,7 @@ plt.figure ( figsize =(8 ,4) )
 
 plt.plot(df["Mes"],df["Laptops"],label="Laptops")
 plt.plot(df["Mes"],df["Smartphones"],label="Smartphones")
-plt.xticks ( rotation =45) 
+plt.xticks (rotation=45) 
 plt.legend ()
 plt.xlabel("MES")
 plt.ylabel("Cantidad de ventas")

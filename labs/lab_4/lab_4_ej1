@@ -1,15 +1,20 @@
 # Ejercicio 1 lab 4
 import pandas as pd
 
+# Se crea el diccionario
 canciones_fav = {"Canción": ["What Was I Made For","No Leaf Clover","The Best"],
              "Artista": ["Billie Eilish","Metallica","Conan Gray"],
              "Duracion_seg": [222,343,228]}
 
-canciones_fav_pd = pd.DataFrame(canciones_fav)
 
+# Se crea el dataframe
+canciones_fav_df = pd.DataFrame(canciones_fav)
+
+
+# Se imprimen resultados
 print("------------------- Data frame canciones fav ---------------------------")
-print(canciones_fav_pd)
+print(canciones_fav_df)
 print("------------------------------------------------------------------------")
-print("Dimensiones del DataFrame: ", canciones_fav_pd.shape)
-print("Tipos de datos en el DataFrame: ", canciones_fav_pd.dtypes)
+print("Dimensiones del DataFrame: ", canciones_fav_df.shape)
+print("Tipos de datos en el DataFrame: ", canciones_fav_df.dtypes)
 print("------------------------------------------------------------------------")
