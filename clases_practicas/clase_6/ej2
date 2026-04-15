@@ -1,0 +1,32 @@
+class Contenido:
+    conteo_total = 0
+    def __init__(self, titulo, year):
+        self.titulo = titulo
+        self.year = year
+
+    @classmethod
+    def obtener_total(cls):
+        return cls.conteo_total
+
+class Pelicula(Contenido):
+    def __init__(self, titulo, year, director , duracion):
+        super().__init__(titulo, year)
+        Contenido.conteo_total += 1
+        self.director = director
+        self.duracion = duracion
+
+    def mostrar_ficha(self):
+
+        print("----------------------- Atributos de Película -------------------------")
+        print("Título: ", self.titulo)
+        print("Año de estreno: ", self.year)
+        print("Director: ", self.director)
+        print("Duración: ", self.duracion)
+        print("-----------------------------------------------------------------------")
+
+peli1 = Pelicula('El señor de los Anillos: La comunidad del Anillo','2001','Peter Jackson','178 min')
+peli2 = Pelicula('El club de la pelea','1999','David Fincher','139 min')
+peli3 = Pelicula('Whiplash','2014','Damien Chazelle','106 min')
+
+peli1.mostrar_ficha()
+print("El total de películas es: ", Contenido.obtener_total())

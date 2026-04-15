@@ -1,0 +1,30 @@
+class Instrumento:
+    unidad_estandar = 'SI'
+
+    def __init__(self,modelo,marca):
+        self.modelo=modelo
+        self.marca=marca
+
+    @staticmethod
+    def convertir_a_base(mili):
+        return mili/1000
+
+class Osciloscopio(Instrumento):
+
+    def __init__(self, modelo, marca):
+        super().__init__(modelo, marca)
+        self.v_div = 1.0
+    def act_v_div(self, newv):
+        self.v_div = newv
+
+    def print_config(self):
+        print(f"[{self.marca}, {self.modelo}] Voltaje/Div | {self.unidad_estandar}")
+
+# Test de instanciación:
+mi_osciloscopio = Osciloscopio(marca="Rigol",modelo="DS1054Z")
+mi_osciloscopio.act_v_div(0.5)
+mi_osciloscopio.print_config()
+
+valor_mV = 500
+valor_V = Instrumento.convertir_a_base(valor_mV)
+print(f"{valor_mV} mV equivalen a {valor_V} V en la unidad base.")
