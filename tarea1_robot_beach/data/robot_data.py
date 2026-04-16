@@ -99,5 +99,5 @@ def generar_trayectoria_ideal(waypoints, puntos_por_segmento=100):
         y_ideal.extend(y_segmento)
     
     return np.array(x_ideal), np.array(y_ideal)
-
+print
 
