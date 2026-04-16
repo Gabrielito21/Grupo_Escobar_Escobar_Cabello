@@ -99,5 +99,12 @@ def generar_trayectoria_ideal(waypoints, puntos_por_segmento=100):
         y_ideal.extend(y_segmento)
     
     return np.array(x_ideal), np.array(y_ideal)
-print
+
+def simular_lidar(n_sectores=36, d_min=0.5, d_max=30.0):
+    
+    angulos_deg = np.linspace(0, 360, n_sectores)
+    distancias = np.random.uniform(d_min, d_max, n_sectores)
+    distancias_norm = (distancias - d_min) / (d_max - d_min)
+    
+    return angulos_deg, distancias, distancias_norm
 
