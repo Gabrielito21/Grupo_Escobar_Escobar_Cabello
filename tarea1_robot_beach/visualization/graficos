@@ -84,16 +84,14 @@ def plot_lidar(angulos, distancias, distancias_norm):
 
 #  Gráfico de Trayectorias
 def plot_trayectorias(x_ppo, y_ppo, x_mask, y_mask, waypoints, nombre):
-    plt.figure(figsize=(10, 10)) # Más cuadrado para que axis equal luzca mejor
+    plt.figure(figsize=(10, 10)) 
     
-    # Dibujar trayectorias
+
     plt.plot(x_ppo, y_ppo, label="PPO", color='blue', alpha=0.7)
     plt.plot(x_mask, y_mask, label="PPO-Mask", color='orange', alpha=0.7)
     
     waypoints = np.array(waypoints)
     plt.scatter(waypoints[:, 0], waypoints[:, 1], color='black', s=100, marker='s', label="Waypoints")
-    
-    # Restricción obligatoria:
     plt.axis('equal') 
     
     plt.title(f"Trayectorias - {nombre}")
