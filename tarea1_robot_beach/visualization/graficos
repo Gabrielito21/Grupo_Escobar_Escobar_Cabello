@@ -1,4 +1,51 @@
 import pandas as pd
+import os 
 import matplotlib.pyplot as plt
 def plot_metricas(diccionario_experimentos,ambiente,ruta):
+    exp_PPO = []    
+    exp_PPO_mask = []   
+    for nombre_exp, detalles in diccionario_experimentos.items():
+        if detalles["ambiente"] == ambiente and detalles["ruta"] == ruta:
+            if detalles["política"] == "PPO":
+                exp_PPO = detalles
+            elif detalles["política"] == "PPO_mask":
+                exp_PPO_mask = detalles
+        if not exp_PPO or not exp_PPO_mask:
+            print(f"No se encontraron experimentos para el ambiente '{ambiente}' y ruta '{ruta}'.")
+            return
+    plt.figure(figsize=(20, 5))
+    nombres = ["PPO", "PPO-Mask"]
+     
+    valores_ise = [exp_PPO["ISE"], exp_PPO_mask["ISE"]]
+    plt.bar(nombres, valores_ise, color=['blue', 'orange'])
+    plt.title("ISE")
+
     
+    plt.subplot(1, 4, 2)
+    valores_iae = [exp_PPO["IAE"], exp_PPO_mask["IAE"]]
+    plt.bar(nombres, valores_iae, color=['blue', 'orange'])
+    plt.title("IAE")
+
+    
+    plt.subplot(1, 4, 3)
+    valores_itse = [exp_PPO["ITSE"], exp_PPO_mask["ITSE"]]
+    plt.bar(nombres, valores_itse, color=['blue', 'orange'])
+    plt.title("ITSE")
+
+    
+    plt.subplot(1, 4, 4)
+    valores_itae = [exp_PPO["ITAE"], exp_PPO_mask["ITAE"]]
+    plt.bar(nombres, valores_itae, color=['blue', 'orange'])
+    plt.title("ITAE")
+
+    plt.tight_layout()
+    if not os.path.exists("resultados_graficos"):
+        os.makedirs("resultados_graficos")
+
+
+    nombre_archivo = f"metricas_{ambiente}_{ruta}.png"
+    ruta_final = os.path.join("resultados_graficos", nombre_archivo)
+
+    # Paso C: Guardar con alta calidad (300 DPI)
+    plt.savefig(ruta_final, dpi=300)
+    plt.show()
