@@ -25,26 +25,30 @@ def plot_metricas(diccionario_experimentos, ambiente, ruta):
     valores_ise = [exp_PPO["ISE"], exp_PPO_mask["ISE"]]
     plt.bar(nombres, valores_ise, color=['blue', 'orange'])
     plt.title("ISE")
+    plt.grid(True, linestyle='--', alpha=0.7)
 
     
     plt.subplot(1, 4, 2)
     valores_iae = [exp_PPO["IAE"], exp_PPO_mask["IAE"]]
     plt.bar(nombres, valores_iae, color=['blue', 'orange'])
     plt.title("IAE")
+    plt.grid(True, linestyle='--', alpha=0.7)
 
     
     plt.subplot(1, 4, 3)
     valores_itse = [exp_PPO["ITSE"], exp_PPO_mask["ITSE"]]
     plt.bar(nombres, valores_itse, color=['blue', 'orange'])
     plt.title("ITSE")
+    plt.grid(True, linestyle='--', alpha=0.7)
 
     
     plt.subplot(1, 4, 4)
     valores_itae = [exp_PPO["ITAE"], exp_PPO_mask["ITAE"]]
     plt.bar(nombres, valores_itae, color=['blue', 'orange'])
     plt.title("ITAE")
-
+    plt.grid()
     plt.tight_layout()
+    plt.grid(True, linestyle='--', alpha=0.7)
     
    
     if not os.path.exists("resultados_graficos"):
@@ -65,13 +69,15 @@ def plot_lidar(angulos, distancias, distancias_norm):
     plt.title("Lectura de LiDAR (Distancias Reales)")
     plt.xlabel("Ángulo (grados)")
     plt.ylabel("Distancia [m]")
+    
 
 
     plt.subplot(1, 2, 2)
-    plt.plot(angulos, distancias_norm, color='orange')
-    plt.title("Lectura de LiDAR (Vector IA)")
+    plt.plot(angulos, distancias_norm, color='red')
+    plt.title("Lectura de LiDAR (Lo que procesa la IA)")
     plt.xlabel("Ángulo (grados)")
     plt.ylabel("Distancia Normalizada")
+    
 
     plt.tight_layout()
     
@@ -98,6 +104,7 @@ def plot_trayectorias(x_ppo, y_ppo, x_mask, y_mask, waypoints, nombre):
     plt.xlabel("X [m]")
     plt.ylabel("Y [m]")
     plt.legend()
+    plt.grid(True, linestyle='--', alpha=0.7)
     
     if not os.path.exists("resultados_graficos"):
         os.makedirs("resultados_graficos")
