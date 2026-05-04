@@ -1,0 +1,22 @@
+class Bateria:
+    def __init__(self,marca):
+        self.marca = marca
+        self.__carga = 100
+
+    def usar_bateria(self, gasto):
+        if (self.__carga - gasto <= 0):
+            print("¡Batería Agotada!")
+            self.__carga = 0
+        else:    
+            self.__carga = self.__carga - gasto
+
+    def ver_carga(self):
+        print("Carga de la batería",self.marca,": ",self.__carga,"%")
+
+b1 = Bateria("Batería 1")
+
+b1.ver_carga()
+b1.usar_bateria(40)
+b1.ver_carga()
+b1.usar_bateria(80)
+b1.ver_carga()
