@@ -1,0 +1,79 @@
+import numpy as np
+
+
+class RobotBase:
+    def __init__(self,nombre,capacidad_carga,x_inicial=0,y_inicial=0,yaw_inicial=0):
+        self.__nombre = nombre
+        self.__capacidad_carga = capacidad_carga
+        self.__bateria = 100
+        self.__pos_x = x_inicial
+        self.__pos_y = y_inicial
+        self.__yaw = yaw_inicial
+        self.__basura_recolectada = 0
+        self.__step_dt = 0.1
+        self.target_x = 5.0
+        self.target_y = 5.0
+
+    def get_nombre(self):
+        return self.__nombre
+    def get_bateria(self):
+        return self.__bateria
+    def get_pos_x(self):
+        return self.__pos_x
+    def get_pos_y(self):
+        return self.__pos_y
+    def get_yaw(self):
+        return self.__yaw
+    def get_basura_recolectada(self):
+        return self.__basura_recolectada
+    
+    def _actualizar_pose(self,x,y,yaw):
+        self.__pos_x = x
+        self.__pos_y = y
+        self.__yaw = yaw    
+
+    def _reducir_bateria(self,cantidad):
+        if (self.__bateria - cantidad >= 0):
+            self.__bateria = self.__bateria - cantidad
+        elif(self.__bateria - cantidad < 0):
+            self.__bateria = 0
+
+    def _recolectar_basura(self,cantidad):
+        if (self.__basura_recolectada + cantidad <= self.__capacidad_carga):
+            self.__basura_recolectada = self.__basura_recolectada + cantidad
+        elif(self.__basura_recolectada + cantidad > self.__capacidad_carga):
+            self.__basura_recolectada = self.__capacidad_carga
+
+    @staticmethod
+    def calc_dist_to_goal(pos_x, pos_y, target_x, target_y):
+        d = np.sqrt((target_x-pos_x)**2 + (target_y-pos_y)**2)
+        return d
+    
+    @staticmethod
+    def calc_yaw_error(pos_x, pos_y, yaw, target_x, target_y):
+        theta = np.atan2(target_y-pos_y, target_x-pos_x)
+        err = theta - yaw
+        err_norm = np.mod(err + np.pi, 2*np.pi) - np.pi 
+
+    def step(self,v,w):
+        if (self.__bateria <= 0):
+            reward = 0
+            return (reward , True)
+        yaw_new = np.mod(self.__yaw + w * self.__step_dt - np.pi, 2*np.pi) - np.pi
+        x_new = self.__pos_x + v * np.cos(yaw_new) * self.__step_dt
+        y_new = self.__pos_y + v * np.sin(yaw_new) * self.__step_dt
+
+        self._actualizar_pose(self,x_new,y_new,yaw_new)
+
+        dist = self.calc_dist_to_goal(pos_x=x_new,pos_y=y_new,yaw=yaw_new,target_x=self.target_x,target_y=self.target_y)
+        yaw_error= self.calc_yaw_error(pos_x=x_new,pos_y=y_new,yaw=yaw_new,target_x=self.target_x,target_y=self.target_y)
+
+        reward = - dist - np.abs(yaw_error)
+
+        if (dist <= 0.5):
+            llegamos = True
+            reward = reward + 100
+
+        return (reward, llegamos)  
+
+    
