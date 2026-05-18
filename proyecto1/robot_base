@@ -76,4 +76,7 @@ class RobotBase:
 
         return (reward, llegamos)  
 
-    
+    def mover(self):
+        raise NotImplementedError("Las clases hijas deben implementar el método 'mover()'.")
+    def limpiar(self):
+        raise NotImplementedError("Las clases hijas deben implementar el método 'limpiar()'.")
