@@ -2,7 +2,7 @@
 # main.py (Código del Profesor)
 # ==========================================
 from modelos_robot import RobotTresRuedas, RobotOruga, RobotDron
-from proyecto1.modelos_robot import RobotBase
+from robot_base import RobotBase
 import analisis
 import visualizacion
 import math
