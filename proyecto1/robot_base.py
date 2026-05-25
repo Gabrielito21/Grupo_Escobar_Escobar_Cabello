@@ -27,7 +27,7 @@ class RobotBase:
     def get_basura_recolectada(self):
         return self.__basura_recolectada
     
-    def _actualizar_pose(self,x,y,yaw):
+    def _actualizar_pose(self, x, y, yaw):
         self.__pos_x = x
         self.__pos_y = y
         self.__yaw = yaw    
@@ -53,7 +53,8 @@ class RobotBase:
     def calc_yaw_error(pos_x, pos_y, yaw, target_x, target_y):
         theta = np.atan2(target_y-pos_y, target_x-pos_x)
         err = theta - yaw
-        err_norm = np.mod(err + np.pi, 2*np.pi) - np.pi 
+        err_norm = np.mod(err + np.pi, 2*np.pi) - np.pi
+        return err_norm 
 
     def step(self,v,w):
         if (self.__bateria <= 0):
@@ -63,18 +64,20 @@ class RobotBase:
         x_new = self.__pos_x + v * np.cos(yaw_new) * self.__step_dt
         y_new = self.__pos_y + v * np.sin(yaw_new) * self.__step_dt
 
-        self._actualizar_pose(self,x_new,y_new,yaw_new)
+        self._actualizar_pose(x_new, y_new, yaw_new)
 
-        dist = self.calc_dist_to_goal(pos_x=x_new,pos_y=y_new,yaw=yaw_new,target_x=self.target_x,target_y=self.target_y)
+        dist = self.calc_dist_to_goal(pos_x=x_new,pos_y=y_new,target_x=self.target_x,target_y=self.target_y)
         yaw_error= self.calc_yaw_error(pos_x=x_new,pos_y=y_new,yaw=yaw_new,target_x=self.target_x,target_y=self.target_y)
 
-        reward = - dist - np.abs(yaw_error)
+        reward = -dist - abs(yaw_error)
 
         if (dist <= 0.5):
             llegamos = True
             reward = reward + 100
+        else:
+            llegamos = False
 
-        return (reward, llegamos)  
+        return reward, llegamos  
 
     def mover(self):
         raise NotImplementedError("Las clases hijas deben implementar el método 'mover()'.")
