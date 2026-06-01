@@ -1,5 +1,6 @@
 from jugadores import Jugador, Defensa, Delantero, Mediocampista, Portero
 import pandas as pd
+import os
 # Se define el país elegido:
 pais_elegido = "Francia"
 
@@ -55,3 +56,59 @@ def simulador(jugadores_titulares):
 simulador(jugadores_titulares)
 
 # Se crea el diccionario
+datos_jugadores = []
+
+for jugador in jugadores_titulares:
+
+    datos = {
+        "Pais": pais_elegido,
+        "Dorsal": jugador.dorsal,
+        "Nombre": jugador.nombre,
+        "Edad": jugador.edad,
+        "Altura_m": jugador.altura,
+        "Posicion": jugador.__class__.__name__
+    }
+    if hasattr(jugador, "goles"):
+        datos["Goles"] = jugador.goles
+
+    if hasattr(jugador, "asistencias"):
+        datos["Asistencias"] = jugador.asistencias
+
+    if hasattr(jugador, "atajadas"):
+        datos["Atajadas"] = jugador.atajadas
+
+    if hasattr(jugador, "balones_recuperados"):
+        datos["Balones_recuperados"] = jugador.balones_recuperados  
+
+# Si el jugador posee esta estadística, se agrega al diccionario.
+# En caso contrario, Pandas rellenará la columna con NaN.
+    datos_jugadores.append(datos)
+
+df = pd.DataFrame(datos_jugadores)
+print("\n==============================")
+print("TABLA DE LA SELECCIÓN")
+print("==============================")
+print(df)
+
+print("\n==============================")
+print("ESTADÍSTICAS")
+print("==============================")
+
+print(f"\nEdad promedio del equipo: {df['Edad'].mean():.2f} años")
+
+print(f"Altura máxima del equipo: {df['Altura_m'].max():.2f} m")
+
+print("\nCantidad de jugadores por posición:")
+print(df["Posicion"].value_counts())
+
+
+print("\nPromedio de edad por posición:")
+print(df.groupby("Posicion")["Edad"].mean())
+
+os.makedirs("output", exist_ok=True)
+
+
+nombre_archivo = f"output/titulares_{pais_elegido.lower()}.csv"
+df.to_csv(nombre_archivo, index=False)
+
+print(f"\nArchivo CSV generado: {nombre_archivo}")
